@@ -1,0 +1,21 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  # - job_name: 'docker'
+  #   static_configs:
+  #     - targets: ['192.168.62.101:9323']
+  - job_name: 'node'
+    static_configs:
+      - targets: ['192.168.62.101:8081']
+  - job_name: 'node2'
+    static_configs:
+      - targets: ['192.168.62.101:8082']
+
+# scrape_configs:
+# - job_name: pushgateway
+#   honor_labels: false
+#   static_configs:
+#   - targets: ['192.168.62.101:9091']
+#     labels:
+#       pushgateway_instance: metricfire

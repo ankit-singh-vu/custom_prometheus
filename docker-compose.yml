@@ -1,0 +1,83 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    networks:
+      - monitoring
+    restart: always
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus:/etc/prometheus
+    networks:
+      - monitoring
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    restart: always
+
+  # prometheus:
+  #   image: prom/pushgateway
+  #   ports:
+  #     - "9091:9091"
+  #   volumes:
+  #     - ./prometheus:/etc/prometheus
+  #   networks:
+  #     - monitoring
+  #   command:
+  #     - '--config.file=/etc/prometheus/prometheus.yml'
+  #   restart: always
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    networks:
+      - monitoring
+    restart: always
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+
+  node:
+    image: "node:8"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./:/home/node/app
+    # expose:
+    #   - "8081"
+    ports:
+      - "8081:8081"
+    command: "node app.js"
+
+  node2:
+    image: "node:8"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./:/home/node/app
+    # expose:
+    #   - "8081"
+    ports:
+      - "8082:8082"
+    command: "node app2.js "
+
+networks:
+  monitoring:
+    driver: bridge
+
+volumes:
+  grafana_data:
+    driver: local

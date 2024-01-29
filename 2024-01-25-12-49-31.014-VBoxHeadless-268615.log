@@ -1,0 +1,12 @@
+Log created: 2024-01-25T12:49:31.142451000Z
+Process ID:  268615 (0x41947)
+Parent PID:  6958 (0x1b2e)
+Executable:  /usr/lib/virtualbox/VBoxHeadless
+Arg[0]: /usr/lib/virtualbox/VBoxHeadless
+Arg[1]: --comment
+Arg[2]: new_metric_controller_1706167824455_57671
+Arg[3]: --startvm
+Arg[4]: 2dcc2c93-e30e-4c9b-b36f-5a306f2419d0
+Arg[5]: --vrde
+Arg[6]: config
+AddRef: illegal refcnt=3221225469 state=2
