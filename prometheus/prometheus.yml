@@ -11,6 +11,10 @@ scrape_configs:
   - job_name: 'node2'
     static_configs:
       - targets: ['192.168.62.101:8082']
+  - job_name: 'qa10'
+    static_configs:
+      - targets: ['d7ea3c45-1575-4a84-9470-a5591a3ed317.qa10.conves.io:3333']
+      # - targets: ['200.225.44.208:3333']
 
 # scrape_configs:
 # - job_name: pushgateway
