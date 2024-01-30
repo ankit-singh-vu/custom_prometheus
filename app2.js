@@ -40,7 +40,7 @@ app.get("/html",function(req,res){
 
 app.post("/metrics",function(req,res){
 
-    fs.readFile('static-metrics.txt', 'utf8', (err, data) => {
+    fs.readFile('example.txt', 'utf8', (err, data) => {
         if (err) {
           console.error(err);
           return;
@@ -55,7 +55,7 @@ app.post("/metrics",function(req,res){
 
 app.get("/metrics",function(req,res){
 
-  fs.readFile('static-metrics.txt', 'utf8', (err, data) => {
+  fs.readFile('example.txt', 'utf8', (err, data) => {
       if (err) {
         console.error(err);
         return;
