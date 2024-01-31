@@ -74,6 +74,34 @@ services:
       - "8082:8082"
     command: "node app2.js "
 
+  postgres:
+    image: postgres:16
+    ports:
+      - 8083:5432
+    environment:
+      POSTGRES_PASSWORD: example
+    # volumes:
+    #   - ./postgres-data:/var/lib/postgresql/data      
+    restart: always
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: boholch@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: dUcgOEi3k13L3GE1Fg0RIHkHK1jjr506lAZa4vFt8CPuUbGgxBvHPDbEdSSCM9Mk
+    ports:
+      - 8084:80
+  postgres-exporter:
+    # image: quay.io/prometheuscommunity/postgres-exporter
+    image: prometheuscommunity/postgres-exporter
+    ports:
+      - 8085:9187
+    environment:
+      # DATA_SOURCE_NAME: postgresql://postgres:example@192.168.62.101:8083/postgres?sslmode=disable
+      DATA_SOURCE_NAME: postgresql://postgres:example@192.168.62.101:8083
+    restart: always
+    depends_on:
+      - postgres
+
 networks:
   monitoring:
     driver: bridge
